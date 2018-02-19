@@ -111,3 +111,19 @@ func nodesFromVolumeExpandReq(req *api.VolExpandReq) ([]uuid.UUID, error) {
 	}
 	return nodes, nil
 }
+
+func nodesFromVolumeShrinkReq(req *api.VolShrinkReq) ([]uuid.UUID, error) {
+	var nodesMap = make(map[string]int)
+	var nodes []uuid.UUID
+	for _, brick := range req.Bricks {
+		if _, ok := nodesMap[brick.NodeID]; !ok {
+			nodesMap[brick.NodeID] = 1
+			u := uuid.Parse(brick.NodeID)
+			if u == nil {
+				return nil, errors.New("Unable to parse Node ID")
+			}
+			nodes = append(nodes, u)
+		}
+	}
+	return nodes, nil
+}

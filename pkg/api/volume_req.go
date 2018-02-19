@@ -54,3 +54,8 @@ type OptionGroup struct {
 
 // OptionGroupReq represents a request to create a new option group
 type OptionGroupReq OptionGroup
+
+// VolShrinkReq represents a request to remove bricks from a volume
+type VolShrinkReq struct {
+	Bricks []BrickReq `json:"bricks"`
+}

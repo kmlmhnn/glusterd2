@@ -24,6 +24,12 @@ func (c *Command) Routes() route.Routes {
 			Pattern:     "/volumes/{volname}/expand",
 			Version:     1,
 			HandlerFunc: volumeExpandHandler},
+		route.Route{
+			Name:        "RemoveBrickStart",
+			Method:      "POST",
+			Pattern:     "/volumes/{volname}/remove-brick/start",
+			Version:     1,
+			HandlerFunc: removeBrickStartHandler},
 		// TODO: Implmement volume reset as
 		// DELETE /volumes/{volname}/options
 		route.Route{
@@ -116,4 +122,5 @@ func (c *Command) RegisterStepFuncs() {
 	registerBricksStatusStepFuncs()
 	registerVolExpandStepFuncs()
 	registerVolOptionStepFuncs()
+	registerVolShrinkStepFuncs()
 }
